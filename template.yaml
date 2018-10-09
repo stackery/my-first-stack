@@ -44,12 +44,6 @@ Resources:
             Path: /
             Method: GET
             RestApiId: !Ref api8B02F357
-        timer51ED7097:
-          Type: Schedule
-          Properties:
-            Schedule: rate(2 hours)
-          Metadata:
-            StackeryName: myTimer
     Metadata:
       StackeryName: getWelcomePage
   database5289F1FE:
