@@ -56,10 +56,10 @@ Resources:
       CopyTagsToSnapshot: true
       DBInstanceClass: db.t2.micro
       DBSubnetGroupName: !Ref database5289F1FESubnetGroup
-      Engine: mariadb
-      EngineVersion: '10.2'
+      Engine: postgres
+      EngineVersion: '10.3'
       MasterUsername: root
-      MasterUserPassword: ''
+      MasterUserPassword: adminpassword
       MultiAZ: false
       PubliclyAccessible: true
       StorageType: gp2
@@ -67,9 +67,11 @@ Resources:
         - Key: Name
           Value: !Sub
             - Stackery Stack ${StackeryStackTagName} Environment ${StackeryEnvironmentTagName} Database ${ResourceName}
-            - ResourceName: database5289F1FE
+            - ResourceName: myDB
       VPCSecurityGroups:
         - !Ref database5289F1FESecurityGroup
+    Metadata:
+      StackeryName: myDB
   database5289F1FESubnetGroup:
     Type: AWS::RDS::DBSubnetGroup
     Properties:
@@ -88,14 +90,14 @@ Resources:
       GroupDescription: Database Security Group
       SecurityGroupIngress:
         CidrIp: 0.0.0.0/0
-        FromPort: 3306
+        FromPort: 5432
         IpProtocol: tcp
-        ToPort: 3306
+        ToPort: 5432
       Tags:
         - Key: Name
           Value: !Sub
             - Stackery Stack ${StackeryStackTagName} Environment ${StackeryEnvironmentTagName} Database ${ResourceName} VPC Security Group
-            - ResourceName: database5289F1FE
+            - ResourceName: myDB
       VpcId: !Ref DefaultVPCId
   cdnC17F3C9E:
     Type: AWS::CloudFront::Distribution
