@@ -230,6 +230,21 @@ Resources:
         Variables:
           TABLE_NAME: !Ref tableCAEC5869
           TABLE_ARN: !GetAtt tableCAEC5869.Arn
+  function5A108248:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub ${AWS::StackName}-function5A108248
+      Description: !Sub
+        - Stackery Stack ${StackeryStackTagName} Environment ${StackeryEnvironmentTagName} Function ${ResourceName}
+        - ResourceName: function5A108248
+      CodeUri: src/function5A108248
+      Handler: index.handler
+      Runtime: nodejs8.10
+      MemorySize: 3008
+      Timeout: 30
+      Tracing: Active
+      Policies:
+        - AWSXrayWriteOnlyAccess
 Parameters:
   StackeryStackTagName:
     Type: String
@@ -246,3 +261,6 @@ Parameters:
   DefaultVPCSubnets:
     Type: List<AWS::EC2::Subnet::Id>
     Description: AWS account-specific default VPC subnets (injected by Stackery at deployment time)
+Metadata:
+  StackeryErrorsTargets:
+    function5A108248: {}
